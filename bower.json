@@ -1,0 +1,14 @@
+{
+    "name": "lpBoilerplate",
+    "main": "index.html",
+    "license": "",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "vendor",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+    }
+}
