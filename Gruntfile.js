@@ -16,8 +16,9 @@ module.exports = function(grunt) {
             ].join("\n")
         },
 
-        // concat js files
+        // concat files
         concat: {
+            // js
             js:{
                 options: {
                     separator: ';\n',
@@ -26,6 +27,7 @@ module.exports = function(grunt) {
                 src: ['src/**/*.js'],
                 dest: 'dist/<%= pkg.name %>.js'
             },
+            // css
             css:{
                 options: {
                     separator: '\n',
@@ -35,7 +37,8 @@ module.exports = function(grunt) {
                 dest: 'dist/<%= pkg.name %>.css'
             }
         },
-
+        
+        // copy files
         copy: {
             // js
             js: {
@@ -55,7 +58,6 @@ module.exports = function(grunt) {
                 ],
                 dest: 'dist/'
             },
-            
             // html
             html: {
                 expand: true,
@@ -63,7 +65,6 @@ module.exports = function(grunt) {
                 src: ['**/*.html'],
                 dest: 'dist/'
             },
-
             // assets
             assets: {
                 expand: true,
@@ -73,13 +74,15 @@ module.exports = function(grunt) {
             }
 
         },
-
+        
+        // clean dist folder (before build)
         clean: {
             build: {
                 src: ['dist/**']
             }
         },
-
+        
+        // uglify js
         uglify: {
             js: {
                 options: {
@@ -90,7 +93,8 @@ module.exports = function(grunt) {
                 }
             }
         },
-
+        
+        // jshint: specify your preferred options in 'globals'
         jshint: {
             files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
             options: {
@@ -110,9 +114,10 @@ module.exports = function(grunt) {
             tasks: ['jshint', 'concat']
         },
 
-        // string replacments in index.html
+        // string replacments     
         replace: {
-            dist: {
+            // index.html 
+            'index.html': {
                 options: {
                     patterns: [{
                         match: 'package',
@@ -129,7 +134,7 @@ module.exports = function(grunt) {
             }
         }
 
-    });
+    }); // end grunt.initConfig
 
     // load tasks
     grunt.loadNpmTasks('grunt-replace');
@@ -140,7 +145,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    // perform tasks, just comment out what you don't need
+    // register Grunt tasks (mind the order of your tasks!), just comment out what you don't need
     grunt.registerTask(
         'default',
         'Compiles all of the assets and copies the files to the build directory.', [
@@ -153,4 +158,4 @@ module.exports = function(grunt) {
         ]
     );
 
-};
+}; // end module.exports

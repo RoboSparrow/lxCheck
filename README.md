@@ -1,27 +1,30 @@
 # GruntWork
 
-GruntWork is a lightweight [Grunt](http://gruntjs.com/) boilerplate I am using for small JS projects.
+GruntWork is a very simplistic [Grunt](http://gruntjs.com/) boilerplate I am using for small JS projects.
 
 ## Install
 
 * edit `package.json` for version, author, license etc
 * add info, dependencies to `bower.json`
+* optionally extend `Gruntfile.js` to your likikng
 
-```
-(sudo) npm install
+```!bash
+npm install
 bower install
 ```
 
 ## Development
 
-## build/publish
+### Watch
 
 ```!bash
-#Build
-grunt
-
-#watch
 grunt watch
+```
+
+### Build
+
+```!bash
+grunt
 ```
 
 ## Used tasks
@@ -36,3 +39,6 @@ grunt watch
 'grunt-contrib-uglify'      // js
 
 ```
+## TODO
+
+ * LESS tasks
