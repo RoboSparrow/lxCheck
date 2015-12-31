@@ -1,6 +1,6 @@
 # GruntWork
 
-GruntWork is a lightweight [Grunt](http://gruntjs.com/) boilerplate I use for small JS projects.
+GruntWork is a lightweight [Grunt](http://gruntjs.com/) boilerplate I am using for small JS projects.
 
 ## Install
 
