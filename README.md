@@ -1,12 +1,12 @@
 # GruntWork
 
-GruntWork is a very simplistic [Grunt](http://gruntjs.com/) boilerplate I am using for small JS projects.
+GruntWork is a very simplistic [Grunt](http://gruntjs.com/) boilerplate I use for small JS projects. It aims to be lightweight and understandable.
 
 ## Install
 
 * edit `package.json` for version, author, license etc
 * add info, dependencies to `bower.json`
-* optionally extend `Gruntfile.js` to your likikng
+* optionally customize `Gruntfile.js` to your needs
 
 ```!bash
 npm install
