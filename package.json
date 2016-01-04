@@ -2,6 +2,7 @@
     "name": "GruntWork",
     "version": "0.0.1",
     "homepage": "",
+    "private": true,
     "licenses": {
         "type": "MIT",
         "url": "https://opensource.org/licenses/MIT"
