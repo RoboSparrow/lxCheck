@@ -1,6 +1,6 @@
 /**
- * GruntWork - v0.0.1 - 2015-12-31
- * Copyright (c) 2015 
+ * GruntWork - v0.0.1 - 2016-01-06
+ * Copyright (c) 2016 
  * Licensed MIT <https://opensource.org/licenses/MIT>
  */
 

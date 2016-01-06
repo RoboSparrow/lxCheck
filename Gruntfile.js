@@ -95,11 +95,13 @@ module.exports = function(grunt) {
         },
         
         // jshint: specify your preferred options in 'globals'
+        // http://jshint.com/docs/options/
         jshint: {
             files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
             options: {
                 // options here to override JSHint defaults
                 globals: {
+                    esversion: 5, // available options: 3, 5, 6 => es 3 for legacy browsers (Internet Explorer 6/7/8/9)
                     jQuery: false,
                     console: true,
                     module: true,
