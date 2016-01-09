@@ -15,6 +15,8 @@ bower install
 
 ## Development
 
+As usual: develop in `src` and compile to `dist`.
+
 ### Watch
 
 ```!bash
