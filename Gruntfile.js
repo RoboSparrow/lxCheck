@@ -1,5 +1,43 @@
 module.exports = function(grunt) {
-
+    
+    ////
+    // configure project
+    ////
+    
+    var CONF = {
+        // task: concat
+        concat: {
+            // name slug for the concated js file (i.e app.js, app.css, app.min.js)
+            destSlug: '<%= pkg.name %>', //destSlug: 'app'
+            // print src file paths as comments
+            printPath: true,
+            // glob patterns
+            files:{
+                js: ['src/main.js', 'src/**/*.js'],     // main file on top
+                css: ['src/main.css', 'src/**/*.css']   // main file on top
+            }
+        },
+        //jhint options, some of the listed are default already buty listed here to be easily edited
+        jshint: {
+            options: {
+                curly: true,
+                funcscope: true,
+                undef: true,
+                unused: true,
+                jquery: false,
+                globals: {
+                    console: true,
+                    module: true,
+                    document: true
+                }
+            }
+        }
+    };
+    
+    ////
+    // grunt config
+    ////
+    
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
@@ -21,20 +59,26 @@ module.exports = function(grunt) {
             // js
             js:{
                 options: {
-                    separator: ';\n',
-                    banner: '<%= meta.banner %>\n'
+                    separator: '\n',
+                    banner: '<%= meta.banner %>\n',
+                    process: function(src, filepath) {
+                        return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
+                    }
                 },
-                src: ['src/**/*.js'],
-                dest: 'dist/<%= pkg.name %>.js'
+                src: CONF.concat.files.js,
+                dest: 'dist/' + CONF.concat.destSlug + '.js'
             },
             // css
             css:{
                 options: {
                     separator: '\n',
-                    banner: '<%= meta.banner %>\n'
+                    banner: '<%= meta.banner %>\n',
+                    process: function(src, filepath) {
+                        return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
+                    }
                 },
-                src: ['src/**/*.css'],
-                dest: 'dist/<%= pkg.name %>.css'
+                src: CONF.concat.files.css,
+                dest: 'dist/' + CONF.concat.destSlug + '.css'
             }
         },
         
@@ -43,7 +87,8 @@ module.exports = function(grunt) {
             // js
             js: {
                 src: [
-                    // vendors, this  rule is very broad, so specify this for your module
+                    // vendors 
+                    // this  rule is very broad, so specify this for your module
                     'vendor/**/build/*.js',
                     'vendor/**/dist/*.js'
                 ],
@@ -52,7 +97,8 @@ module.exports = function(grunt) {
             // css
             css: {
                 src: [
-                    // vendors, this  rule is very broad, so specify this for your module
+                    // vendors
+                    // this  rule is very broad, so specify this for your module
                     'vendor/**/build/*.css',
                     'vendor/**/dist/*.css'
                 ],
@@ -98,22 +144,13 @@ module.exports = function(grunt) {
         // http://jshint.com/docs/options/
         jshint: {
             files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
-            options: {
-                // options here to override JSHint defaults
-                globals: {
-                    esversion: 5, // available options: 3, 5, 6 => es 3 for legacy browsers (Internet Explorer 6/7/8/9)
-                    jQuery: false,
-                    console: true,
-                    module: true,
-                    document: true
-                }
-            }
+            options: CONF.jshint.options
         },
 
         // configure watch task
         watch: {
-            files: ['<%= jshint.files %>'],
-            tasks: ['jshint', 'concat']
+            files: ['<%= jshint.files %>', 'src/**/*.html'],
+            tasks: ['jshint', 'concat', 'copy']
         },
 
         // string replacments     
