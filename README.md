@@ -17,6 +17,8 @@ bower install
 
 As usual: develop in `src` and compile to `dist`.
 
+Project meta data are defined in `package.json`. The Gruntfile features custom `CONF` object for a quick project setup.
+
 ### Watch
 
 ```!bash

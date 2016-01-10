@@ -1,10 +1,11 @@
 module.exports = function(grunt) {
-    
+
     ////
     // configure project
     ////
-    
+
     var CONF = {
+
         // task: concat
         concat: {
             // name slug for the concated js file (i.e app.js, app.css, app.min.js)
@@ -17,6 +18,7 @@ module.exports = function(grunt) {
                 css: ['src/main.css', 'src/**/*.css']   // main file on top
             }
         },
+
         //jhint options, some of the listed are default already buty listed here to be easily edited
         jshint: {
             options: {
@@ -32,12 +34,13 @@ module.exports = function(grunt) {
                 }
             }
         }
+
     };
-    
+
     ////
     // grunt config
     ////
-    
+
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
@@ -81,13 +84,13 @@ module.exports = function(grunt) {
                 dest: 'dist/' + CONF.concat.destSlug + '.css'
             }
         },
-        
+
         // copy files
         copy: {
             // js
             js: {
                 src: [
-                    // vendors 
+                    // vendors
                     // this  rule is very broad, so specify this for your module
                     'vendor/**/build/*.js',
                     'vendor/**/dist/*.js'
@@ -120,14 +123,14 @@ module.exports = function(grunt) {
             }
 
         },
-        
+
         // clean dist folder (before build)
         clean: {
             build: {
                 src: ['dist/**']
             }
         },
-        
+
         // uglify js
         uglify: {
             js: {
@@ -139,7 +142,7 @@ module.exports = function(grunt) {
                 }
             }
         },
-        
+
         // jshint: specify your preferred options in 'globals'
         // http://jshint.com/docs/options/
         jshint: {
@@ -153,9 +156,9 @@ module.exports = function(grunt) {
             tasks: ['jshint', 'concat', 'copy']
         },
 
-        // string replacments     
+        // string replacments
         replace: {
-            // index.html 
+            // index.html
             'index.html': {
                 options: {
                     patterns: [{
@@ -175,7 +178,12 @@ module.exports = function(grunt) {
 
     }); // end grunt.initConfig
 
-    // load tasks
+    ////
+    // grunt tasks
+    ////
+
+    // requirements
+
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -184,7 +192,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    // register Grunt tasks (mind the order of your tasks!), just comment out what you don't need
+    // custom tasks (mind the order of your tasks!), just comment out what you don't need
     grunt.registerTask(
         'default',
         'Compiles all of the assets and copies the files to the build directory.', [
