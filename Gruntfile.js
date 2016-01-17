@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         concat: {
             // name slug for the concated js file (i.e app.js, app.css, app.min.js)
             destSlug: '<%= pkg.name %>', //destSlug: 'app'
-            // print src file paths as comments
+            // debug: print src file paths as comments
             printPath: true,
             // glob patterns
             files:{
@@ -19,7 +19,7 @@ module.exports = function(grunt) {
             }
         },
 
-        //jhint options, some of the listed are default already buty listed here to be easily edited
+        // jhint options, some of the listed are default already buty listed here to be easily edited
         jshint: {
             options: {
                 curly: true,
