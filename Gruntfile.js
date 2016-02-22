@@ -153,7 +153,7 @@ module.exports = function(grunt) {
         // configure watch task
         watch: {
             files: ['<%= jshint.files %>', 'src/**/*.html'],
-            tasks: ['jshint', 'concat', 'copy']
+            tasks: ['jshint', 'concat', 'copy', 'replace']
         },
 
         // string replacments
