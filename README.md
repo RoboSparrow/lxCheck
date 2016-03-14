@@ -1,6 +1,8 @@
 # GruntWork
 
-GruntWork is a very simplistic [Grunt](http://gruntjs.com/) boilerplate I use for small JS projects. It aims to be lightweight and understandable.
+GruntWork is a simplistic [Grunt](http://gruntjs.com/) boilerplate for small JS projects. It aims to be lightweight, understandable and easy to configure and extend.
+
+<a title="Eadweard Muybridge [Public domain or Public domain], via Wikimedia Commons" href="https://commons.wikimedia.org/wiki/File%3ABoar_walking.gif"><img width="512" alt="Boar walking" src="https://upload.wikimedia.org/wikipedia/commons/2/2e/Boar_walking.gif"/></a>
 
 ## Install
 
@@ -31,7 +33,7 @@ grunt watch
 grunt
 ```
 
-## Used tasks
+## Tasks
 
 ```
 'grunt-replace'             // dist file names in index.html
