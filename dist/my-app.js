@@ -1,5 +1,5 @@
 /**
- * my-app - v0.0.1 - 2016-01-10
+ * my-app - v0.0.1 - 2016-03-19
  * Copyright (c) 2016 
  * Licensed MIT <https://opensource.org/licenses/MIT>
  */
