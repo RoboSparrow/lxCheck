@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             destSlug: '<%= pkg.name %>', //destSlug: 'app'
             // debug: print src file paths as comments
             printPath: true,
-            // glob patterns
+            // glob patterns and order for file concat tasks
             files:{
                 js: ['src/main.js', 'src/**/*.js'],     // main file on top
                 css: ['src/main.css', 'src/**/*.css']   // main file on top
@@ -89,21 +89,21 @@ module.exports = function(grunt) {
 
         // copy files
         copy: {
-            // js
+            // js copy files (no concat)
             js: {
                 src: [
                     // vendors
-                    // this  rule is very broad, so specify this for your module
+                    // this  rule is very broad, so specify this for your vendors
                     'vendor/**/build/*.js',
                     'vendor/**/dist/*.js'
                 ],
                 dest: 'dist/'
             },
-            // css
+            // css copy files (no concat)
             css: {
                 src: [
                     // vendors
-                    // this  rule is very broad, so specify this for your module
+                    // this  rule is very broad, so specify this for your vensdors
                     'vendor/**/build/*.css',
                     'vendor/**/dist/*.css'
                 ],
