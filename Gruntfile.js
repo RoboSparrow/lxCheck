@@ -42,6 +42,8 @@ module.exports = function(grunt) {
     ////
 
     grunt.initConfig({
+        
+        CONF: CONF,
 
         pkg: grunt.file.readJSON('package.json'),
 
@@ -138,7 +140,7 @@ module.exports = function(grunt) {
                     banner: '<%= meta.banner %>\n'
                 },
                 files: {
-                    'dist/<%= pkg.name %>.min.js': ['<%= concat.js.dest %>']
+                    'dist/<%= CONF.concat.destSlug %>.min.js': ['<%= concat.js.dest %>']
                 }
             }
         },
@@ -163,7 +165,7 @@ module.exports = function(grunt) {
                 options: {
                     patterns: [{
                         match: 'package',
-                        replacement: '<%= pkg.name %>'
+                        replacement: '<%= CONF.concat.destSlug %>'
                     }, {
                         match: 'version',
                         replacement: '<%= pkg.version %>'
