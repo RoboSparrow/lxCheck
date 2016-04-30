@@ -67,6 +67,7 @@ module.exports = function(grunt) {
                     separator: '\n',
                     banner: '<%= meta.banner %>\n',
                     process: function(src, filepath) {
+                        // add reference to concated file
                         return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
                     }
                 },
@@ -103,7 +104,7 @@ module.exports = function(grunt) {
             css: {
                 src: [
                     // vendors
-                    // this  rule is very broad, so specify this for your vensdors
+                    // this  rule is very broad, so specify this for your vendors
                     'vendor/**/build/*.css',
                     'vendor/**/dist/*.css'
                 ],
