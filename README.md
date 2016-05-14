@@ -14,6 +14,11 @@ GruntWork is a simplistic [Grunt](http://gruntjs.com/) boilerplate for small JS 
 npm install
 bower install
 ```
+### Update devDependencies
+
+```
+npm install --save-dev grunt grunt-replace grunt-contrib-clean grunt-contrib-concat grunt-contrib-copy grunt-contrib-jshint grunt-contrib-watch grunt-contrib-uglify
+```
 
 ## Development
 
@@ -45,6 +50,7 @@ grunt
 'grunt-contrib-uglify'      // js
 
 ```
+
 ## TODO
 
  * LESS tasks
