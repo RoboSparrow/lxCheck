@@ -42,7 +42,7 @@ module.exports = function(grunt) {
     ////
 
     grunt.initConfig({
-        
+
         CONF: CONF,
 
         pkg: grunt.file.readJSON('package.json'),
@@ -69,7 +69,8 @@ module.exports = function(grunt) {
                     process: function(src, filepath) {
                         // add reference to concated file
                         return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
-                    }
+                    },
+                    sourceMap: true
                 },
                 src: CONF.concat.files.js,
                 dest: 'dist/' + CONF.concat.destSlug + '.js'
@@ -81,7 +82,8 @@ module.exports = function(grunt) {
                     banner: '<%= meta.banner %>\n',
                     process: function(src, filepath) {
                         return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
-                    }
+                    },
+                    sourceMap: true
                 },
                 src: CONF.concat.files.css,
                 dest: 'dist/' + CONF.concat.destSlug + '.css'
@@ -138,7 +140,8 @@ module.exports = function(grunt) {
         uglify: {
             js: {
                 options: {
-                    banner: '<%= meta.banner %>\n'
+                    banner: '<%= meta.banner %>\n',
+                    sourceMap: true
                 },
                 files: {
                     'dist/<%= CONF.concat.destSlug %>.min.js': ['<%= concat.js.dest %>']
