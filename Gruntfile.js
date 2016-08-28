@@ -167,13 +167,18 @@ module.exports = function(grunt) {
             // index.html
             'index.html': {
                 options: {
-                    patterns: [{
-                        match: 'package',
-                        replacement: '<%= CONF.concat.destSlug %>'
-                    }, {
-                        match: 'version',
-                        replacement: '<%= pkg.version %>'
-                    }]
+                    patterns: [
+                        {
+                            match: 'package',
+                            replacement: '<%= CONF.concat.destSlug %>'
+                        }, {
+                            match: 'version',
+                            replacement: '<%= pkg.version %>'
+                        }, {
+                            match: 'description',
+                            replacement: '<%= pkg.description %>'
+                        }
+                    ]
                 },
                 files: [{
                     src: ['dist/index.html'],

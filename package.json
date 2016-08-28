@@ -1,6 +1,7 @@
 {
   "name": "my-app",
   "version": "0.0.1",
+  "description": "",
   "homepage": "",
   "private": true,
   "licenses": {
