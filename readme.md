@@ -6,7 +6,7 @@ GruntWork is a simplistic [Grunt](http://gruntjs.com/) boilerplate for small JS 
 
 ## Install
 
-* edit `package.json` for version, author, license etc
+* edit `package.json` for version, author, description, license etc
 * add info, dependencies to `bower.json`
 * optionally customize `Gruntfile.js` to your needs
 
