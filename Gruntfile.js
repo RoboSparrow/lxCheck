@@ -9,32 +9,16 @@ module.exports = function(grunt) {
         // task: concat
         concat: {
             // name slug for the concated js file (i.e app.js, app.css, app.min.js)
-            destSlug: '<%= pkg.name %>', //destSlug: 'app'
+            destSlug: 'spec', //destSlug: 'app'
             // debug: print src file paths as comments
             printPath: true,
             // glob patterns and order for file concat tasks
             files:{
-                js: ['src/main.js', 'src/**/*.js'],     // main file on top
-                css: ['src/main.css', 'src/**/*.css']   // main file on top
-            }
-        },
-
-        // jhint options, some of the listed are default already buty listed here to be easily edited
-        jshint: {
-            options: {
-                curly: true,
-                funcscope: true,
-                undef: true,
-                unused: true,
-                jquery: false,
-                globals: {
-                    console: true,
-                    module: true,
-                    document: true
-                }
+                js: ['src/spec.js', 'src/**/*.spec.js'],     // main file on top
+                css: ['src/main.css', 'src/**/*.css'],   // main file on top
+                req:[ 'req/req.js', 'req/req.xapi.js']   //lxReq
             }
         }
-
     };
 
     ////
@@ -75,6 +59,21 @@ module.exports = function(grunt) {
                 src: CONF.concat.files.js,
                 dest: 'dist/' + CONF.concat.destSlug + '.js'
             },
+            // js
+            req:{
+                options: {
+                    separator: '\n',
+                    banner: '<%= meta.banner %>\n',
+                    process: function(src, filepath) {
+                        // add reference to concated file
+                        return (CONF.concat.printPath) ? '/*' + filepath + '*/\n\n' + src : src;
+                    },
+                    sourceMap: true
+                },
+                src: CONF.concat.files.req,
+                dest: 'dist/lx-request.js'
+            },
+
             // css
             css:{
                 options: {
@@ -92,25 +91,38 @@ module.exports = function(grunt) {
 
         // copy files
         copy: {
-            // js copy files (no concat)
-            js: {
+            helper: {
+                expand: true,
+                cwd: 'src/',
                 src: [
-                    // vendors
-                    // this  rule is very broad, so specify this for your vendors
-                    'vendor/**/build/*.js',
-                    'vendor/**/dist/*.js'
+                    'helper.js'
                 ],
                 dest: 'dist/'
             },
-            // css copy files (no concat)
-            css: {
+            mocha: {
+                expand: true,
+                cwd: 'node_modules/mocha/',
                 src: [
-                    // vendors
-                    // this  rule is very broad, so specify this for your vendors
-                    'vendor/**/build/*.css',
-                    'vendor/**/dist/*.css'
+                    'mocha.js',
+                    'mocha.css'
                 ],
-                dest: 'dist/'
+                dest: 'dist/vendor/'
+            },
+            chai: {
+                expand: true,
+                cwd: 'node_modules/chai/',
+                src: [
+                    'chai.js'
+                ],
+                dest: 'dist/vendor/'
+            },
+            sha2: {
+                expand: true,
+                cwd: 'node_modules/js-sha256/build/',
+                src: [
+                    'sha256.min.js'
+                ],
+                dest: 'dist/vendor'
             },
             // html
             html: {
@@ -136,55 +148,19 @@ module.exports = function(grunt) {
             }
         },
 
-        // uglify js
-        uglify: {
-            js: {
-                options: {
-                    banner: '<%= meta.banner %>\n',
-                    sourceMap: true
-                },
-                files: {
-                    'dist/<%= CONF.concat.destSlug %>.min.js': ['<%= concat.js.dest %>']
-                }
-            }
-        },
-
         // jshint: specify your preferred options in 'globals'
         // http://jshint.com/docs/options/
         jshint: {
-            files: ['Gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
-            options: CONF.jshint.options
+            files: ['Gruntfile.js', 'src/**/*.js', 'req/**/*.js'],
+            options:{
+                jshintrc: true
+            }
         },
 
         // configure watch task
         watch: {
             files: ['<%= jshint.files %>', 'src/**/*.css', 'src/**/*.html'],
-            tasks: ['jshint', 'concat', 'copy', 'replace']
-        },
-
-        // string replacments
-        replace: {
-            // index.html
-            'index.html': {
-                options: {
-                    patterns: [
-                        {
-                            match: 'package',
-                            replacement: '<%= CONF.concat.destSlug %>'
-                        }, {
-                            match: 'version',
-                            replacement: '<%= pkg.version %>'
-                        }, {
-                            match: 'description',
-                            replacement: '<%= pkg.description %>'
-                        }
-                    ]
-                },
-                files: [{
-                    src: ['dist/index.html'],
-                    dest: 'dist/index.html'
-                }]
-            }
+            tasks: ['jshint', 'concat', 'copy']
         }
 
     }); // end grunt.initConfig
@@ -195,13 +171,11 @@ module.exports = function(grunt) {
 
     // requirements
 
-    grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
 
     // custom tasks (mind the order of your tasks!), just comment out what you don't need
     grunt.registerTask(
@@ -210,9 +184,7 @@ module.exports = function(grunt) {
             'clean',
             'jshint',
             'concat',
-            'copy',
-            'replace',
-            'uglify'
+            'copy'
         ]
     );
 

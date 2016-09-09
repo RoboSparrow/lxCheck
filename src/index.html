@@ -1,13 +1,35 @@
-<!doctype html>
-<html lang=en-us>
-    <head><meta charset=utf-8>
-    <title></title>
-    <meta name="description" content="@@description">
-    <link rel="stylesheet" type="text/css" href="./@@package.css?v=@@version" />
-    <script src="./@@package.js?v=@@version"></script>
+<htmL>
+
+<head>
+    <link rel="stylesheet" href="./vendor/mocha.css" />
+
+    <script src="./lx-request.js"></script>
+    <script src="./vendor/sha256.min.js"></script>
+
 </head>
 
 <body>
-</body>
+    <form id="BasicAuth" name="basicAuth">
+        <input type="text" name="lrs" placeholder="LRS URL" value="">
+        <input type="text" name="user" placeholder="Username" value="">
+        <input type="text" name="pass" placeholder="Password" value="">
+        <select name="version">
+            <option value="1.0.0">1.0.0</option>
+            <option value="1.0.1">1.0.1</option>
+            <option value="1.0.2" selected>1.0.2</option>
+            <option value="1.0.3">1.0.3</option>
+        </select>
+        <input type="submit" value="Submit">
+    </form>
 
-</html>
+    <div id="mocha"></div>
+    <script src="./vendor/chai.js"></script>
+    <script src="./vendor/mocha.js"></script>
+    <script src="./helper.js"></script>
+    <script src="./spec.js"></script>
+
+    <script>
+        mocha.run();
+    </script>
+</body>
+</htmL>

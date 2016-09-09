@@ -1,1 +1,0 @@
-{"version":3,"sources":["../src/main.js"],"names":[],"mappings":";;;;;;AAAA,EAAE,GAAG,CAAC,IAAI,CAAC,EAAE,EAAE;AACf;AACA,CAAC,QAAQ,GAAG;AACZ,IAAI,CAAC,GAAG,CAAC,MAAM,EAAE;AACjB,IAAI,EAAE,CAAC,IAAI,CAAC,IAAI,CAAC,IAAI,CAAC,EAAE;AACxB,KAAK","file":"my-app.js","sourcesContent":["/*src/main.js*/\n\n(function(){\n    'use strict';\n    /* code goes here */\n})();\n"]}

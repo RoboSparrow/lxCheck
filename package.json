@@ -1,12 +1,19 @@
 {
-  "name": "my-app",
+  "name": "lrs-check",
   "version": "0.0.1",
-  "description": "",
+  "description": "Simple tests for xAPIL LRS",
   "homepage": "",
   "private": true,
+  "author": "@RoboSparrow (jboeselt)",
   "licenses": {
     "type": "MIT",
     "url": "https://opensource.org/licenses/MIT"
+  },
+  "dependencies": {
+    "chai": "^3.5.0",
+    "js-sha256": "^0.3.1",
+    "mocha": "^3.0.2",
+    "promise": "^7.1.1"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
@@ -14,9 +21,7 @@
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-jshint": "^1.0.0",
-    "grunt-contrib-uglify": "^1.0.1",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-replace": "^1.0.1"
+    "grunt-contrib-watch": "^1.0.0"
   },
   "repository": {
     "type": "git",
