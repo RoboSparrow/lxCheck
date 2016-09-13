@@ -1,5 +1,5 @@
 /**
- * lrs-check - v0.0.1 - 2016-09-09
+ * lrs-check - v0.0.1 - 2016-09-13
  * Copyright (c) 2016 @RoboSparrow (jboeselt)
  * Licensed MIT <https://opensource.org/licenses/MIT>
  */
@@ -74,6 +74,9 @@ var req = (function(){
 
     //// parse JSON
     var _parseResponseBody = function(body, config) {
+        if(!body || body === undefined){
+            return body;
+        }
         if(config.responseType === 'json'){
             try{
                 return JSON.parse(body);
@@ -337,6 +340,13 @@ if((typeof module !== 'undefined' && module.exports)){
             responseType: 'json'
         };
         return req.request(url, req.mergeHash(defaults, config));// note the order of merge. default overwrites are allowed
+    };
+
+    req.xapi.uuid = function(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                return v.toString(16);
+        });
     };
 
     return req;

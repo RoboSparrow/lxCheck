@@ -13,7 +13,8 @@
     "chai": "^3.5.0",
     "js-sha256": "^0.3.1",
     "mocha": "^3.0.2",
-    "promise": "^7.1.1"
+    "promise": "^7.1.1",
+    "purecss": "^0.6.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1",

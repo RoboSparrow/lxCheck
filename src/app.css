@@ -1,11 +1,3 @@
-/**
- * lrs-check - v0.0.1 - 2016-09-13
- * Copyright (c) 2016 @RoboSparrow (jboeselt)
- * Licensed MIT <https://opensource.org/licenses/MIT>
- */
-
-/*src/app.css*/
-
 /* styles go here */
 .lrs-auth-form{
  font-size: 12px;
@@ -18,5 +10,3 @@
     width: auto;
     margin-right: 1em;
 }
-
-/*# sourceMappingURL=spec.css.map */
