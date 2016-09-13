@@ -1,12 +1,4 @@
 /**
- * lrs-check - v0.0.1 - 2016-09-09
- * Copyright (c) 2016 @RoboSparrow (jboeselt)
- * Licensed MIT <https://opensource.org/licenses/MIT>
- */
-
-/*req/req.js*/
-
-/**
  * @author jboeselt
  * simple xapi http requests via XHR or NODE (request module)
  * `$ node my-test.js`
@@ -74,6 +66,9 @@ var req = (function(){
 
     //// parse JSON
     var _parseResponseBody = function(body, config) {
+        if(!body || body === undefined){
+            return body;
+        }
         if(config.responseType === 'json'){
             try{
                 return JSON.parse(body);
@@ -306,46 +301,3 @@ var req = (function(){
 if(req.NODE){
     module.exports = req;
 }
-
-/*req/req.xapi.js*/
-
-/**
- * @author jboeselt
- * simple xapi http requests via XHR or NODE (request module)
- * `$ node my-test.js`
- */
-
-/* jshint node: true */
-/* jshint esversion: 3 */
-if((typeof module !== 'undefined' && module.exports)){
-    var req = require('./req.js');
-}
-
-(function(req){
-
-    'use strict';
-
-    //// default xapi request
-    req.xapi = function(api, config){
-        var url = req.xapi.LRS + api;
-        var defaults = {
-            headers: {
-                'Content-Type'             : 'application/json',
-                'Authorization'            : req.xapi.AUTH,
-                'X-Experience-API-Version' : req.xapi.VERSION
-            },
-            responseType: 'json'
-        };
-        return req.request(url, req.mergeHash(defaults, config));// note the order of merge. default overwrites are allowed
-    };
-
-    return req;
-
-}(req));
-
-//// node
-if(req.NODE){
-    module.exports = req;
-}
-
-//# sourceMappingURL=lx-request.js.map

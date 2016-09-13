@@ -104,9 +104,10 @@ module.exports = function(grunt) {
                 cwd: 'node_modules/mocha/',
                 src: [
                     'mocha.js',
-                    'mocha.css'
+                    'mocha.css',
+                    'images/*'
                 ],
-                dest: 'dist/vendor/'
+                dest: 'dist/vendor/mocha'
             },
             chai: {
                 expand: true,
@@ -114,7 +115,16 @@ module.exports = function(grunt) {
                 src: [
                     'chai.js'
                 ],
-                dest: 'dist/vendor/'
+                dest: 'dist/vendor/mocha'
+            },
+            pure: {
+                expand: true,
+                cwd: 'node_modules/purecss/build/',
+                src: [
+                    'pure-min.css',
+                    'grids-responsive-min.css',
+                ],
+                dest: 'dist/vendor/pure'
             },
             sha2: {
                 expand: true,

@@ -66,6 +66,9 @@ var req = (function(){
 
     //// parse JSON
     var _parseResponseBody = function(body, config) {
+        if(!body || body === undefined){
+            return body;
+        }
         if(config.responseType === 'json'){
             try{
                 return JSON.parse(body);

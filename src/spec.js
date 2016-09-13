@@ -1,73 +1,13 @@
-(function(Helper, req){
-    'use strict';
+// dumb copy files
 
-    var statement = {
-        actor: {
-            'mbox': 'mailto: anonymous@lxhive.com',
-            'name': 'Anoymous'
-        },
-        verb: {
-            'id': 'http://adlnet.gov/expapi/verbs/launched',
-            'display': {
-                'en-US': 'launched'
-            }
-        },
-        object: {
-            'id': 'http://lxhive.com/activities/lrs-check',
-            'definition': {
-                'name': {
-                    'en-Us': "Demos"
-                }
-            }
-        }
-    };
+require('file?name=req/req.js!../req/req.js');
+require('file?name=req/req.xapi.js!../req/req.xapi.js');
 
-    var statementId;
+require('file?name=index.html!./index.html');
+require('file?name=app.css!./app.css');
 
-    describe('Setup Authentication', function() {
+require('file?name=helper.js!./helper.js');
 
-        before(function(done){
-            this.timeout(0);//disable for this test
-            Helper.authForm(done);
-        });
-
-        it('have authentication configured', function(done){
-            done();
-        });
-
-
-
-        describe('Send Statement', function() {
-
-            var result;
-            var instance;
-
-            before(function(done){
-                req.xapi(
-                    '/statements',
-                    {
-                        method: 'POST',
-                        data: statement,
-                        always: function(res, ins){console.log(res, ins);
-                            result = res;
-                            instance = ins;
-                            done();
-                        }
-                    }
-                );
-            });
-
-            it('should send a statement', function(done){
-                assert.strictEqual(result.status, 200, 'response status: 200' );
-                assert.strictEqual(result.statusText.toLowerCase(), 'ok', 'response status message: ok' );
-                assert.strictEqual(Object.prototype.toString.call(result.data), '[object Array]', 'is an array' );
-                assert.strictEqual(result.data.length, 1, 'has one element' );
-                statementId = result.data[0];
-                done();
-            });
-
-        });
-
-    });
-
-})(window.Helper, window.req);
+// bundle
+require('./specs/statement-api.js');
+require('./specs/activity-state-api.js');

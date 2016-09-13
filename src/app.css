@@ -1,0 +1,12 @@
+/* styles go here */
+.lrs-auth-form{
+ font-size: 12px;
+}
+.lrs-auth-form fieldset{
+ padding: 1em; background: #eaeaea;
+}
+.lrs-auth-form .form-row{
+    display: inline-block;
+    width: auto;
+    margin-right: 1em;
+}

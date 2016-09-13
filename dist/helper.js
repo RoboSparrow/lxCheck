@@ -10,7 +10,7 @@
         version: null,
         user: null,
         pass: null,
-        setAuth: function(store){console.log(this);
+        setAuth: function(store){
             store = store || false;
             //lrs auth
             req.xapi.LRS = this.lrs;
@@ -31,21 +31,21 @@
             if(!data.hasOwnProperty('lrs')){
                 return false;
             }
-            this.lrs = data.lrs;
+            LRS.lrs = data.lrs;
             if(!data.hasOwnProperty('user')){
                 return false;
             }
-            this.user = data.user;
+            LRS.user = data.user;
             if(!data.hasOwnProperty('pass')){
                 return false;
             }
-            this.pass = data.pass;
+            LRS.pass = data.pass;
             if(!data.hasOwnProperty('version')){
                 return false;
             }
-            this.version = data.version;
+            LRS.version = data.version;
 
-            this.setAuth(false);
+            LRS.setAuth(false);
             return true;
         }
     };
@@ -78,6 +78,9 @@
 
             el = form.querySelector('[name=lrs]');
             var check = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(el.value);
+            if(check){
+                el.value.replace(/\/$/, '');//trailing slash
+            }
             errors += parseInt((!check), 10);
             el.style.backgroundColor = (!check) ? 'red' : 'transparent';
 
@@ -115,8 +118,10 @@
 
     };
 
+
     window.Helper = {
-        authForm: authForm
+        authForm: authForm,
+        getAuth: LRS.getAuth
     };
 
 
