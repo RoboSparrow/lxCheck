@@ -1,4 +1,15 @@
 /**
+<<<<<<< HEAD:dist/req/req.js
+=======
+ * lrs-check - v0.0.1 - 2016-09-13
+ * Copyright (c) 2016 @RoboSparrow (jboeselt)
+ * Licensed MIT <https://opensource.org/licenses/MIT>
+ */
+
+/*req/req.js*/
+
+/**
+>>>>>>> 516d8fbab65cc8217ad5e2855e82debda3a3abd2:dist/lx-request.js
  * @author jboeselt
  * simple xapi http requests via XHR or NODE (request module)
  * `$ node my-test.js`
@@ -301,3 +312,56 @@ var req = (function(){
 if(req.NODE){
     module.exports = req;
 }
+<<<<<<< HEAD:dist/req/req.js
+=======
+
+/*req/req.xapi.js*/
+
+/**
+ * @author jboeselt
+ * simple xapi http requests via XHR or NODE (request module)
+ * `$ node my-test.js`
+ */
+
+/* jshint node: true */
+/* jshint esversion: 3 */
+if((typeof module !== 'undefined' && module.exports)){
+    var req = require('./req.js');
+}
+
+(function(req){
+
+    'use strict';
+
+    //// default xapi request
+    req.xapi = function(api, config){
+        var url = req.xapi.LRS + api;
+        var defaults = {
+            headers: {
+                'Content-Type'             : 'application/json',
+                'Authorization'            : req.xapi.AUTH,
+                'X-Experience-API-Version' : req.xapi.VERSION
+            },
+            responseType: 'json'
+        };
+        return req.request(url, req.mergeHash(defaults, config));// note the order of merge. default overwrites are allowed
+    };
+
+    req.xapi.uuid = function(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+                return v.toString(16);
+        });
+    };
+
+    return req;
+
+}(req));
+
+//// node
+if(req.NODE){
+    module.exports = req;
+}
+
+//# sourceMappingURL=lx-request.js.map
+>>>>>>> 516d8fbab65cc8217ad5e2855e82debda3a3abd2:dist/lx-request.js
