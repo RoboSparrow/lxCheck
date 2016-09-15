@@ -28,8 +28,10 @@ module.exports = {
                 { from: 'node_modules/mocha/mocha.css', to: 'mocha'},
                 { from: 'node_modules/mocha/images/*', to: 'mocha/images', flatten: true},
                 { from: 'node_modules/chai/chai.js', to: 'chai', flatten: true},
-                { from: 'node_modules/purecss/build/pure-min.css', to: 'purecss', flatten: true},
-                { from: 'node_modules/purecss/build/grids-responsive-min.css', to: 'purecss', flatten: true}
+                //{ from: 'node_modules/js-sha256/build/sha256.min.js', to: 'js-sha256'},
+                { from: 'node_modules/bootstrap/dist/css/bootstrap.min.css', to: 'bootstrap'},
+                { from: 'node_modules/bootstrap/dist/js/bootstrap.min.js', to: 'bootstrap'},
+                { from: 'node_modules/bootstrap/dist/fonts/*', to: 'bootstrap/fonts'}
             ])
         ],
         watch: true,

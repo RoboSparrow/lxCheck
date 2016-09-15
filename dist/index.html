@@ -1,78 +1,91 @@
 <html>
 <head>
     <meta charset="utf-8">
-<<<<<<< HEAD
+    <title>Brightcookie | lxCheck - the quick LRS Check</title>
+
+    <link href="./bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <script src="./bootstrap/bootstrap.min.js"></script>
+
     <link href="./mocha/mocha.css" rel="stylesheet" />
     <link href="./app.css" rel="stylesheet" />
 
     <script src="./req/req.js"></script>
     <script src="./req/req.xapi.js"></script>
-=======
-    <link href="https://cdn.rawgit.com/mochajs/mocha/2.2.5/mocha.css" rel="stylesheet" />
-    <link href="./spec.css" rel="stylesheet" />
 
-    <script src="./lx-request.js"></script>
-    <script src="./vendor/sha256.min.js"></script>
->>>>>>> 516d8fbab65cc8217ad5e2855e82debda3a3abd2
 </head>
 
 <body>
 
     <div id="mocha">
+        <h1 class="page-header">lxCheck: <small>The quick LRS Check</small></h1>
 
-        <form id="BasicAuth" name="basicAuth" method="post" class="lrs-auth-form">
-            <fieldset>
+        <div class="row">
+            <p>
+                A basic xPAI LRS check using the <a href="https://mochajs.org/" target="_blank"> Mocha</a> BDD testing framework.
+                <br>Enter Basic Authentication details in the form below.
+            </p>
+        </div>
 
-                <div class="form-row">
-                    <label for="lrs">Lrs url</label>
-                    <input required type="text" name="lrs" placeholder="LRS URL" value="">
-                </div>
+        <div class="row">
+            <form id="BasicAuth" name="basicAuth" method="post" class="form-horizontal lrs-auth-form well">
 
-                <div class="form-row">
-                    <label for="user">User</label>
-                    <input required type="text" name="user" placeholder="Username" value="">
-                </div>
+                <fieldset>
 
-                <div class="form-row">
-                    <label for="pass">Password</label>
-                    <input required type="text" name="pass" placeholder="Password" value="">
-                </div>
+                    <div class="form-group form-group-lg">
+                        <label class="col-sm-2 control-label" for="lrs">Lrs url</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" required type="text" name="lrs" placeholder="LRS URL" value="">
+                        </div>
+                    </div>
 
-                <div class="form-row">
-                    <label for="password">xAPI version</label>
-                    <select required name="version">
-                        <option value="1.0.0">1.0.0</option>
-                        <option value="1.0.1">1.0.1</option>
-                        <option value="1.0.2" selected>1.0.2</option>
-                        <option value="1.0.3">1.0.3</option>
-                    </select>
-                </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-2 control-label" for="user">User</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" required type="text" name="user" placeholder="Username" value="">
+                        </div>
+                    </div>
 
-                <div class="form-row">
-                    <input type="submit" class="pure-button pure-button-primary" value="Submit">
-                </div>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-2 control-label" for="pass">Password</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" required type="password" name="pass" placeholder="Password" value="">
+                        </div>
+                    </div>
 
-            </fieldset>
-        </form>
+                    <div class="form-group form-group-sm">
+                        <label class="col-sm-2 control-label" for="password">xAPI version</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" required name="version">
+                                <option value="1.0.0">1.0.0</option>
+                                <option value="1.0.1">1.0.1</option>
+                                <option value="1.0.2" selected>1.0.2</option>
+                                <option value="1.0.3">1.0.3</option>
+                            </select>
+                        </div>
+                    </div>
 
+                    <div class="form-group form-group-sm">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" class="btn btn-primary" value="Submit">
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
     </div>
 
-<<<<<<< HEAD
     <script src="./chai/chai.js"></script>
     <script src="./mocha/mocha.js"></script>
-=======
-    <script src="./vendor/mocha/chai.js"></script>
-    <script src="./vendor/mocha/mocha.js"></script>
->>>>>>> 516d8fbab65cc8217ad5e2855e82debda3a3abd2
+
     <script src="./helper.js"></script>
     <script src="./spec.js"></script>
 
     <script>
-
+    Helper.authForm();
     if(Helper.getAuth()){
         mocha.run();
     }
-
     </script>
 </body>
 </htmL>

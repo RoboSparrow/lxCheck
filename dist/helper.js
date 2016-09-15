@@ -97,12 +97,11 @@
 
     };
 
-    var authForm = function(done){
+    var authForm = function(){
 
         var form = document.getElementById('BasicAuth');
 
         if(Form.getAuth(form)){
-            done();
         }
 
         form.addEventListener('submit', function(event) {

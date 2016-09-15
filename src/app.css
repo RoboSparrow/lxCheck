@@ -1,12 +1,28 @@
+
+
+/*  bootstrap mocha conflicts */
+#mocha-stats .progress{
+    background-color: transparent;
+    background-image: none;
+}
+
+#mocha h1{
+    margin-bottom: 20px;
+}
+
+ul#mocha-stats{
+    padding: 10px 25px;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 0 0 10px rgba(100, 100, 100, .5);
+}
+
+#mocha .row{
+ font-size: 10px;
+}
+
 /* styles go here */
+
 .lrs-auth-form{
- font-size: 12px;
-}
-.lrs-auth-form fieldset{
- padding: 1em; background: #eaeaea;
-}
-.lrs-auth-form .form-row{
-    display: inline-block;
-    width: auto;
-    margin-right: 1em;
+    font-size: 10px;
 }
