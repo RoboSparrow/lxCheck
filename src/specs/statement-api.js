@@ -60,7 +60,7 @@
                     {
                         method: 'POST',
                         data: statement,
-                        always: function(res, ins){console.log(res, ins);
+                        always: function(res, ins){
                             result = res;
                             instance = ins;
                             setTimeout(done, 500);
@@ -91,7 +91,7 @@
                     {
                         method: 'GET',
                         query: {statementId: statementId},
-                        always: function(res, ins){console.log(res, ins);
+                        always: function(res, ins){
                             result = res;
                             instance = ins;
                             done();
@@ -125,7 +125,7 @@
                         method: 'PUT',
                         query: {statementId: putStatementId},
                         data: voidingStatement,
-                        always: function(res, ins){console.log(res, ins);
+                        always: function(res, ins){
                             result = res;
                             instance = ins;
                             setTimeout(done, 500);
@@ -154,7 +154,7 @@
                         method: 'GET',
                         data: statement,
                         query: {statementId: statementId},
-                        always: function(res, ins){console.log(res, ins);
+                        always: function(res, ins){
                             result = res;
                             instance = ins;
                             done();

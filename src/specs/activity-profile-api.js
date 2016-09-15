@@ -1,39 +1,37 @@
     ////
-    //  Statement API
+    //  Activity Profile API
     ////
 
-    describe('State API', function() {
+    describe('Activity Profile API', function() {
 
         var now = new Date();
 
-        var _sharedId = req.xapi.uuid();
+        var _activityId = req.xapi.uuid();
 
-        var createState = function() {
+        var createProfile = function() {
             return {
-                stateId: req.xapi.uuid(),
-                activityId: 'http://lxhive.com/activities/' + _sharedId,
-                agent: {'mbox' : 'mailto: '  + _sharedId  + '@lxhive.com' },
-                registration: req.xapi.uuid()
+                activityId: _activityId,
+                profileId: req.xapi.uuid()
             };
         };
 
-        var states = [];
+        var profiles = [];
 
-        describe('POST /activities/state', function() {
+        describe('POST /activities/profile', function() {
 
             var result;
             var instance;
 
             before(function(done){
 
-                var state = createState();
-                states.push(state);
+                var profile = createProfile();
+                profiles.push(profile);
 
                 req.xapi(
-                    '/activities/state',
+                    '/activities/profile',
                     {
                         method: 'POST',
-                        query: state,
+                        query: profile,
                         data: {
                             custom: now.toISOString()
                         },
@@ -46,7 +44,7 @@
                 );
             });
 
-            it('should store an activity state', function(done){
+            it('should store an activity profile', function(done){
                 assert.strictEqual(result.status, 204, 'response status: 204' );
                 assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: No content' );
                 done();
@@ -54,53 +52,24 @@
 
         });
 
-        describe('PUT /activities/state', function() {
+        describe('POST /activities/profile', function() {
 
             var result;
             var instance;
 
             before(function(done){
 
-                var state = createState();
-                states.push(state);
+                var profile = createProfile();
+                profiles.push(profile);
 
                 req.xapi(
-                    '/activities/state',
+                    '/activities/profile',
                     {
                         method: 'PUT',
-                        query: state,
+                        query: profile,
                         data: {
                             custom: now.toISOString()
                         },
-                        always: function(res, ins){
-                            result = res;
-                            instance = ins;
-                            setTimeout(done, 500);
-                        }
-                    }
-                );
-            });
-
-            it('should store an activity state', function(done){
-                assert.strictEqual(result.status, 204, 'response status: 204' );
-                assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: No content' );
-                done();
-            });
-
-        });
-
-        describe('GET single /activities/state', function() {
-
-            var result;
-            var instance;
-
-            before(function(done){
-
-                req.xapi(
-                    '/activities/state',
-                    {
-                        method: 'GET',
-                        query: states[0],
                         always: function(res, ins){
                             result = res;
                             instance = ins;
@@ -110,7 +79,36 @@
                 );
             });
 
-            it('receive a state object with data', function(done){
+            it('should store an activity profile', function(done){
+                assert.strictEqual(result.status, 204, 'response status: 204' );
+                assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: No content' );
+                done();
+            });
+
+        });
+
+        describe('GET single /activities/profile', function() {
+
+            var result;
+            var instance;
+
+            before(function(done){
+
+                req.xapi(
+                    '/activities/profile',
+                    {
+                        method: 'GET',
+                        query: profiles[0],
+                        always: function(res, ins){
+                            result = res;
+                            instance = ins;
+                            done();
+                        }
+                    }
+                );
+            });
+
+            it('receive an activity profile object with data', function(done){
                 assert.strictEqual(result.status, 200, 'response status: 200' );
                 assert.strictEqual(result.statusText.toLowerCase(), 'ok', 'response status message: ok' );
                 assert.strictEqual(Object.prototype.toString.call(result.data), '[object Object]', 'is an object' );
@@ -120,20 +118,18 @@
 
         });
 
-        describe('GET multiple /activities/state', function() {
+        describe('GET multiple /activities/profile', function() {
 
             var result;
             var instance;
 
             before(function(done){
                 req.xapi(
-                    '/activities/state',
+                    '/activities/profile',
                     {
                         method: 'GET',
                         query: {
-                            activityId: states[0].activityId,
-                            agent: states[0].agent,
-                            since: now.toISOString()
+                            activityId: _activityId
                         },
                         always: function(res, ins){
                             result = res;
@@ -144,41 +140,62 @@
                 );
             });
 
-            it('receive an array of state ids', function(done){
+            it('receive an array of activity profile ids', function(done){
                 assert.strictEqual(result.status, 200, 'response status: 200' );
                 assert.strictEqual(result.statusText.toLowerCase(), 'ok', 'response status message: ok' );
                 assert.strictEqual(Object.prototype.toString.call(result.data), '[object Array]', 'is an array');
-                assert.strictEqual(result.data.length, states.length, 'array length matches the previously sent states');
+                assert.strictEqual(result.data.length, profiles.length, 'array length matches the previously sent profiles');
 
                 done();
             });
 
         });
 
-        describe('DELETE multiple /activities/state', function() {
+        describe('DELETE a /activities/profile', function() {
 
             var result;
             var instance;
 
             before(function(done){
+
+                var count = 0;
+
+                var _done = function(done){
+                    count++;
+                    if(count === 2){
+                        done();
+                    }
+                };
+
                 req.xapi(
-                    '/activities/state',
+                    '/activities/profile',
                     {
                         method: 'DELETE',
-                        query: {
-                            activityId: states[0].activityId,
-                            agent: states[0].agent
-                        },
+                        query: profiles[0],
                         always: function(res, ins){
                             result = res;
                             instance = ins;
-                            done();
+                            _done(done);
                         }
                     }
                 );
+
+                req.xapi(
+                    '/activities/profile',
+                    {
+                        method: 'DELETE',
+                        query: profiles[1],
+                        always: function(res, ins){
+                            result = res;
+                            instance = ins;
+                            _done(done);
+                        }
+                    }
+                );
+
             });
 
-            it('delete all written states', function(done){
+            it('delete a previously stored activity profile', function(done){
                 assert.strictEqual(result.status, 204, 'response status: 204' );
                 assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: no content' );
                 setTimeout(done, 500);
