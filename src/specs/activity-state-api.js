@@ -172,7 +172,7 @@
                         always: function(res, ins){
                             result = res;
                             instance = ins;
-                            done();
+                            setTimeout(done, 500);
                         }
                     }
                 );
@@ -181,10 +181,37 @@
             it('delete all written states', function(done){
                 assert.strictEqual(result.status, 204, 'response status: 204' );
                 assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: no content' );
-                setTimeout(done, 500);
+                done();
             });
 
         });
+        
+        describe('Check deletion of state documents', function() {
 
+            var result;
+            var instance;
+
+            before(function(done){
+                req.xapi(
+                    '/activities/state',
+                    {
+                        method: 'GET',
+                        query:  states[0],
+                        always: function(res, ins){
+                            result = res;
+                            instance = ins;
+                            done();
+                        }
+                    }
+                );
+            });
+
+            it('should not return a state document', function(done){
+                assert.strictEqual(result.status, 404, 'response status: 404' );
+                assert.strictEqual(result.statusText.toLowerCase(), 'not found', 'response status message: not found' );
+                done();
+            });
+
+        });
 
     });

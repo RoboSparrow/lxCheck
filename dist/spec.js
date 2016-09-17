@@ -140,7 +140,7 @@
 	    var putStatementId;
 	    var statement;
 	    var voidingStatement;
-	
+	    
 	    ////
 	    //  Statement API
 	    ////
@@ -490,7 +490,7 @@
 	                        always: function(res, ins){
 	                            result = res;
 	                            instance = ins;
-	                            done();
+	                            setTimeout(done, 500);
 	                        }
 	                    }
 	                );
@@ -499,11 +499,38 @@
 	            it('delete all written states', function(done){
 	                assert.strictEqual(result.status, 204, 'response status: 204' );
 	                assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: no content' );
-	                setTimeout(done, 500);
+	                done();
 	            });
 	
 	        });
+	        
+	        describe('Check deletion of state documents', function() {
 	
+	            var result;
+	            var instance;
+	
+	            before(function(done){
+	                req.xapi(
+	                    '/activities/state',
+	                    {
+	                        method: 'GET',
+	                        query:  states[0],
+	                        always: function(res, ins){
+	                            result = res;
+	                            instance = ins;
+	                            done();
+	                        }
+	                    }
+	                );
+	            });
+	
+	            it('should not return a state document', function(done){
+	                assert.strictEqual(result.status, 404, 'response status: 404' );
+	                assert.strictEqual(result.statusText.toLowerCase(), 'not found', 'response status message: not found' );
+	                done();
+	            });
+	
+	        });
 	
 	    });
 
@@ -712,11 +739,39 @@
 	            it('delete a previously stored activity profile', function(done){
 	                assert.strictEqual(result.status, 204, 'response status: 204' );
 	                assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: no content' );
-	                setTimeout(done, 500);
+	                done();
 	            });
 	
 	        });
 	
+	        
+	        describe('Check deletion of profile documents', function() {
+	
+	            var result;
+	            var instance;
+	
+	            before(function(done){
+	                req.xapi(
+	                    '/activities/profile',
+	                    {
+	                        method: 'GET',
+	                        query: profiles[0],
+	                        always: function(res, ins){
+	                            result = res;
+	                            instance = ins;
+	                            done();
+	                        }
+	                    }
+	                );
+	            });
+	
+	            it('should not return a profile document', function(done){
+	                assert.strictEqual(result.status, 404, 'response status: 404' );
+	                assert.strictEqual(result.statusText.toLowerCase(), 'not found', 'response status message: not found' );
+	                done();
+	            });
+	
+	        });
 	
 	    });
 
@@ -725,14 +780,30 @@
 /* 10 */
 /***/ function(module, exports) {
 
-	// @TODO
+	    ////
+	    //  Agent Profile API
+	    ////
+	
+	    describe('Agent Profile API', function() {
+	        
+	        xit('should be tested');
+	        
+	    });
 
 
 /***/ },
 /* 11 */
 /***/ function(module, exports) {
 
-	// @TODO
+	    ////
+	    //  Legacy requests (Cross Origin Requests)
+	    ////
+	
+	    describe('Legacy mode (CORS POST)', function() {
+	        
+	        xit('should be tested');
+	        
+	    });
 
 
 /***/ }

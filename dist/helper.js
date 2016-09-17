@@ -10,13 +10,16 @@
         version: null,
         user: null,
         pass: null,
+        legacyMode: null,
         setAuth: function(store){
             store = store || false;
             //lrs auth
-            req.xapi.LRS = this.lrs;
-            req.xapi.AUTH = 'Basic ' + window.btoa(this.user + ':' + this.pass);
-            req.xapi.VERSION = this.version;
-
+            req.xapi.LRS = LRS.lrs;
+            req.xapi.AUTH = 'Basic ' + window.btoa(LRS.user + ':' + LRS.pass);
+            req.xapi.VERSION = LRS.version;
+            if(LRS.legacyMode){
+                req.xapi.LEGACY = true;
+            }
             if(store){
                 window.localStorage.setItem('lrs', JSON.stringify(this));
             }
@@ -28,6 +31,10 @@
             if(!data){
                 return false;
             }
+            if(data.hasOwnProperty('legacyMode')){
+                LRS.legacyMode = data.legacyMode;
+            }
+            // these are required, if one is missing return false
             if(!data.hasOwnProperty('lrs')){
                 return false;
             }
@@ -59,9 +66,15 @@
                 form.querySelector('[name=user]').value = LRS.user;
                 form.querySelector('[name=pass]').value = LRS.pass;
                 form.querySelector('[name=version]').value = LRS.version;
-                return true;
             }
-            return false;
+            
+            // additional options
+            var legacyOption = form.querySelector('[name=legacyMode]');
+            if(legacyOption){
+                legacyOption.checked = LRS.legacyMode;
+            }
+            
+            return hasAuth;
         },
 
         setAuth:function(form){
@@ -69,6 +82,13 @@
             LRS.user = form.querySelector('[name=user]').value;
             LRS.pass = form.querySelector('[name=pass]').value;
             LRS.version = form.querySelector('[name=version]').value;
+            
+            // additional options
+            var legacyOption = form.querySelector('[name=legacyMode]');
+            if(legacyOption){
+                LRS.legacyMode = legacyOption.checked;
+            }
+            
             LRS.setAuth(true);
         },
 
@@ -102,6 +122,12 @@
         var form = document.getElementById('BasicAuth');
 
         if(Form.getAuth(form)){
+            if(LRS.legacyMode){
+                var el = document.createElement('div');
+                el.className = 'alert alert-warning';
+                el.innerHTML = 'Legacy Mode (<a href="https://github.com/adlnet/xAPI-Spec/blob/master/xAPI.md#cors" target="_blank">xAPI CORS</a>';
+                form.parentNode.appendChild(el);
+            }
         }
 
         form.addEventListener('submit', function(event) {

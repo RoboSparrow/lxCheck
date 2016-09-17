@@ -198,10 +198,38 @@
             it('delete a previously stored activity profile', function(done){
                 assert.strictEqual(result.status, 204, 'response status: 204' );
                 assert.strictEqual(result.statusText.toLowerCase(), 'no content', 'response status message: no content' );
-                setTimeout(done, 500);
+                done();
             });
 
         });
 
+        
+        describe('Check deletion of profile documents', function() {
+
+            var result;
+            var instance;
+
+            before(function(done){
+                req.xapi(
+                    '/activities/profile',
+                    {
+                        method: 'GET',
+                        query: profiles[0],
+                        always: function(res, ins){
+                            result = res;
+                            instance = ins;
+                            done();
+                        }
+                    }
+                );
+            });
+
+            it('should not return a profile document', function(done){
+                assert.strictEqual(result.status, 404, 'response status: 404' );
+                assert.strictEqual(result.statusText.toLowerCase(), 'not found', 'response status message: not found' );
+                done();
+            });
+
+        });
 
     });

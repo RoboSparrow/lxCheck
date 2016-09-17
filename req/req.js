@@ -66,9 +66,11 @@ var req = (function(){
 
     //// parse JSON
     var _parseResponseBody = function(body, config) {
+        
         if(!body || body === undefined){
             return body;
         }
+        
         if(config.responseType === 'json'){
             try{
                 return JSON.parse(body);
@@ -129,6 +131,9 @@ var req = (function(){
                 result.status = xhr.status;
                 result.statusText = xhr.statusText;
                 result.data =_parseResponseBody(xhr.responseText, config);
+                if(typeof config.transformResponse === 'function'){
+                    config.transformResponse(result);
+                }
 
                 if(xhr.status < 299) {
                     config.success(result, xhr);
@@ -190,7 +195,11 @@ var req = (function(){
                     result.status = res.statusCode;
                     result.statusText = res.statusMessage;
                     result.data =_parseResponseBody(data, config);
-
+                    
+                    if(typeof config.transformResponse === 'function'){
+                        config.transformResponse(result);
+                    }
+                    
                     config.success(result, res);
                 }else{
                     config.error(result, res);
@@ -226,10 +235,15 @@ var req = (function(){
             headers: {},
             data: null,
             responseType: '',//?TODO
+            transformResponse: false, // function(res)
             success: function(){},  //(data, res)
             error: function(){},    //(error, res)
             always: function(){}   //(statusCode, res)
         };
+        
+ 
+        // merge config with defaults
+        config = mergeHash(defaults, config);
 
         // data
         if(config.responseType !== 'json' && config.data){
@@ -259,12 +273,11 @@ var req = (function(){
                 query.push(encodeURIComponent(prop) + "=" + value);
             }
         }
+        
         if(query.length){
             url = url + '?' + query.join('&');
         }
 
-        // merge config with defaults
-        config = mergeHash(defaults, config);
 
         // invoke request
         if(NODE){
