@@ -140,7 +140,7 @@
 	    var putStatementId;
 	    var statement;
 	    var voidingStatement;
-	    
+	
 	    ////
 	    //  Statement API
 	    ////
@@ -149,7 +149,7 @@
 	
 	        statement = {
 	            actor: {
-	                'mbox': 'mailto: anonymous@lxhive.com',
+	                'mbox': 'mailto:anonymous@lxhive.com',
 	                'name': 'Anoymous'
 	            },
 	            verb: {
@@ -170,7 +170,7 @@
 	
 	        voidingStatement = {
 	            actor: {
-	                mbox: 'mailto: anonymous@lxhive.com',
+	                mbox: 'mailto:anonymous@lxhive.com',
 	                name: 'Anoymous'
 	            },
 	            verb : {
@@ -330,7 +330,7 @@
 	            return {
 	                stateId: req.xapi.uuid(),
 	                activityId: 'http://lxhive.com/activities/' + _sharedId,
-	                agent: {'mbox' : 'mailto: '  + _sharedId  + '@lxhive.com' },
+	                agent: {'mbox' : 'mailto:'  + _sharedId  + '@lxhive.com' },
 	                registration: req.xapi.uuid()
 	            };
 	        };
@@ -503,7 +503,7 @@
 	            });
 	
 	        });
-	        
+	
 	        describe('Check deletion of state documents', function() {
 	
 	            var result;

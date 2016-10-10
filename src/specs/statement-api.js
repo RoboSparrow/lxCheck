@@ -2,7 +2,7 @@
     var putStatementId;
     var statement;
     var voidingStatement;
-    
+
     ////
     //  Statement API
     ////
@@ -11,7 +11,7 @@
 
         statement = {
             actor: {
-                'mbox': 'mailto: anonymous@lxhive.com',
+                'mbox': 'mailto:anonymous@lxhive.com',
                 'name': 'Anoymous'
             },
             verb: {
@@ -32,7 +32,7 @@
 
         voidingStatement = {
             actor: {
-                mbox: 'mailto: anonymous@lxhive.com',
+                mbox: 'mailto:anonymous@lxhive.com',
                 name: 'Anoymous'
             },
             verb : {

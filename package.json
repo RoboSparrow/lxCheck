@@ -12,6 +12,7 @@
   "dependencies": {
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
+    "commander": "^2.9.0",
     "js-sha256": "^0.3.1",
     "mocha": "^3.0.2",
     "promise": "^7.1.1"
