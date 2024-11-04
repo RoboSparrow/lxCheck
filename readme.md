@@ -1,11 +1,11 @@
 # lxCheck
 
-Quick LRS check site
+Quick xAPI LRS check site
 
 
 ## Development
 
 ```
-cd <root
+cd <root>
 webpack
 ```
